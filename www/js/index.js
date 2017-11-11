@@ -45,7 +45,15 @@ var app = {
             // save this server-side and use it to push notifications to this device
             alert(token);
         }, function(error) {
-           alert(error);
+            alert(error);
+        });
+
+        window.FirebasePlugin.onTokenRefresh(function(token) {
+            // save this server-side and use it to push notifications to this device
+            alert('token');
+            alert(token);
+        }, function(error) {
+            alert(error);
         });
     }
 };
