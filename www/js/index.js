@@ -55,6 +55,22 @@ var app = {
         }, function(error) {
             alert(error);
         });
+
+
+        window.FirebasePlugin.getInfo(function(info) {
+            // the status of the developer mode setting (true/false)
+            alert(info.configSettings.developerModeEnabled);
+            // the timestamp (milliseconds since epoch) of the last successful fetch
+            alert(info.fetchTimeMillis);
+            // the status of the most recent fetch attempt (int)
+            alert(info.lastFetchStatus);
+        }, function(error) {
+            alert(error);
+        });
+
+
+
+
     }
 };
 
