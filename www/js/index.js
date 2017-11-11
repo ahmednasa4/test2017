@@ -40,6 +40,13 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+
+        window.FirebasePlugin.getToken(function(token) {
+            // save this server-side and use it to push notifications to this device
+            alert(token);
+        }, function(error) {
+           alert(error);
+        });
     }
 };
 
