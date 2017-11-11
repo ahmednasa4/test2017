@@ -29,6 +29,8 @@ var app = {
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
 
+
+
         const push = PushNotification.init({
             android: {},
             browser: {
@@ -41,6 +43,43 @@ var app = {
             },
             windows: {}
         });
+
+        push.on('registration', function(data) {
+            alert('registration event: ' + data.registrationId);
+
+            var oldRegId = localStorage.getItem('registrationId');
+            if (oldRegId !== data.registrationId) {
+                // Save new registration ID
+                localStorage.setItem('registrationId', data.registrationId);
+                // Post registrationId to your app server as the value has changed
+            }
+
+            // var parentElement = document.getElementById('registration');
+            // var listeningElement = parentElement.querySelector('.waiting');
+            // var receivedElement = parentElement.querySelector('.received');
+
+            // listeningElement.setAttribute('style', 'display:none;');
+            // receivedElement.setAttribute('style', 'display:block;');
+        });
+
+        push.on('error', function(e) {
+            console.log("push error = " + e.message);
+        });
+
+        push.on('notification', function(data) {
+            alert('notification event');
+            navigator.notification.alert(
+                data.message, // message
+                null, // callback
+                data.title, // title
+                'Ok' // buttonName
+            );
+        });
+
+
+
+
+
     },
 
     // Update DOM on a Received Event
