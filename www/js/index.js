@@ -28,6 +28,19 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
+
+        const push = PushNotification.init({
+            android: {},
+            browser: {
+                pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+            },
+            ios: {
+                alert: "true",
+                badge: true,
+                sound: 'false'
+            },
+            windows: {}
+        });
     },
 
     // Update DOM on a Received Event
@@ -40,36 +53,6 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-
-        window.FirebasePlugin.getToken(function(token) {
-            // save this server-side and use it to push notifications to this device
-            alert(token);
-        }, function(error) {
-            alert(error);
-        });
-
-        window.FirebasePlugin.onTokenRefresh(function(token) {
-            // save this server-side and use it to push notifications to this device
-            alert('token');
-            alert(token);
-        }, function(error) {
-            alert(error);
-        });
-
-
-        // window.FirebasePlugin.getInfo(function(info) {
-        //     // the status of the developer mode setting (true/false)
-        //     alert(info.configSettings.developerModeEnabled);
-        //     // the timestamp (milliseconds since epoch) of the last successful fetch
-        //     alert(info.fetchTimeMillis);
-        //     // the status of the most recent fetch attempt (int)
-        //     alert(info.lastFetchStatus);
-        // }, function(error) {
-        //     alert(error);
-        // });
-
-
-
 
     }
 };
